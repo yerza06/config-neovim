@@ -13,6 +13,7 @@ set softtabstop=4
 set mouse=a
 set encoding=UTF-8
 set nowrap
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
 "set clibboard=unnamedplus
 set noswapfile
