@@ -1,6 +1,7 @@
 
 
 set number
+set relativenumber
 set so=10
 set autoindent
 set tabstop=4
