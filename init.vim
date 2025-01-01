@@ -2,7 +2,7 @@
 
 set number
 set relativenumber
-set so=10
+set so=10 
 set autoindent
 set tabstop=4
 set shiftwidth=4
@@ -35,12 +35,16 @@ Plug 'https://github.com/ryanoasis/vim-devicons'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'mattn/emmet-vim'
 
+Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
+Plug 'folke/todo-comments.nvim'
+"Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+
 call plug#end()
 
-lua << END
+lua << END 
 require('lualine').setup()
 END
 
 nnoremap <C-b> :NERDTree<CR>
-nnoremap <C-n> :NERDTreeClose
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <space> :nohlsearch<CR>
