@@ -15,6 +15,8 @@ set mouse=a
 set encoding=UTF-8
 set nowrap
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+set clipboard+=unnamedplus
+
 
 "set clibboard=unnamedplus
 set noswapfile
@@ -34,7 +36,7 @@ Plug 'https://github.com/ryanoasis/vim-devicons'
 "Plug 'loctvl842/monokai-pro.nvim'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'mattn/emmet-vim'
-
+Plug 'projekt0n/github-nvim-theme'
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
 Plug 'folke/todo-comments.nvim'
@@ -45,6 +47,9 @@ call plug#end()
 lua << END 
 require('lualine').setup()
 END
+
+colorscheme github_dark_high_contrast
+
 
 nnoremap <C-b> :NERDTree<CR>
 nnoremap <space> :nohlsearch<CR>
