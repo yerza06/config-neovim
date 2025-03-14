@@ -40,13 +40,22 @@ Plug 'projekt0n/github-nvim-theme'
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
 Plug 'folke/todo-comments.nvim'
+Plug 'windwp/nvim-autopairs'
 "Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+" or                                , { 'branch': '0.1.x' }
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 
 call plug#end()
 
 lua << END 
 require('lualine').setup()
 END
+
+lua << EOF
+require("nvim-autopairs").setup {}
+EOF
 
 colorscheme github_dark_high_contrast
 
