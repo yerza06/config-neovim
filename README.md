@@ -2,12 +2,7 @@
 
 Установить конфигурация:
 ```bash
-git clone https://github.com/yerza06/config-neovim.git ~/.config/nvim
+git clone https://github.com/yerza06/config-neovim.git ~/.config/nvim ~/.config/nvim
 ```
-> [!NOTE] sasasa
-> asda
-> adasda
-
-adsalsjdskallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
-
-После этого нужно установить [vim-plug](https://github.com/junegunn/vim-plug)
+> [!NOTE]
+> Для обновление исползуйте команду `git pull`.
