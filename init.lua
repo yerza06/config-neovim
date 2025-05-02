@@ -17,6 +17,18 @@ vim.opt.langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGH
 vim.opt.clipboard:append("unnamedplus") -- Аналог set clipboard+=unnamedplus
 vim.opt.swapfile = false         -- Аналог set noswapfile
 
+local function dashboard_header() return {
+  '', '', '',
+'██╗   ██╗███████╗██████╗ ███████╗ █████╗ ███╗   ██╗██╗   ██╗██╗███╗   ███╗',
+'╚██╗ ██╔╝██╔════╝██╔══██╗╚══███╔╝██╔══██╗████╗  ██║██║   ██║██║████╗ ████║',
+' ╚████╔╝ █████╗  ██████╔╝  ███╔╝ ███████║██╔██╗ ██║██║   ██║██║██╔████╔██║',
+'  ╚██╔╝  ██╔══╝  ██╔══██╗ ███╔╝  ██╔══██║██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║',
+'   ██║   ███████╗██║  ██║███████╗██║  ██║██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║',
+'   ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
+'', '', ''
+}
+end
+
 -- Установка lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -83,13 +95,29 @@ require("lazy").setup({
 
   -- Переключение между буферами
   { "akinsho/bufferline.nvim", tag = "*", opts = {} },
+  --{"loctvl842/monokai-pro.nvim", config = function() vim.cmd("colorscheme monokai-pro-spectrum") end },
+
+  {
+  'nvimdev/dashboard-nvim',
+  event = 'VimEnter',
+  config = function()
+    require('dashboard').setup {
+      -- config
+      config = {
+        header = dashboard_header(),
+      },
+    }
+  end,
+  dependencies = { {'nvim-tree/nvim-web-devicons'}}
+}
 })
 
 -- Горячие клавиши
 vim.keymap.set("n", "<C-b>", ":NERDTree<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<space>", ":nohlsearch<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-n>", ":Telescope find_files<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-m>", ":Telescope buffers<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-o>", ":Telescope find_files<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<TAB>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 
 -- Функция проверки расширения файла
 local function check_file_extension()
@@ -103,19 +131,15 @@ local function check_file_extension()
 
   -- Примеры действий в зависимости от расширения
   if ext == "lua" then
-    print("Открыт Lua-файл: " .. file)
     vim.opt.tabstop = 2  -- Установить табуляцию 2 для Lua
     vim.opt.shiftwidth = 2
   elseif ext == "py" then
-    print("Открыт Python-файл: " .. file)
     vim.opt.tabstop = 4
     vim.opt.shiftwidth = 4
   elseif ext == "md" then
-    print("Открыт Markdown-файл: " .. file)
     --vim.cmd("MarkdownPreview") -- Автоматический предпросмотр Markdown
     vim.opt.wrap = true
   elseif ext == "html" then
-    print("Открыт HTML-файл: " .. file)
     vim.opt.tabstop = 2
     vim.opt.shiftwidth = 2
   else
@@ -128,3 +152,4 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufNewFile"}, {
   pattern = "*",
   callback = check_file_extension,
 })
+
