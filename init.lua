@@ -97,7 +97,8 @@ require("lazy").setup({
   { "nvim-telescope/telescope.nvim", tag = "0.1.8", config = function() require("telescope").setup() end },
 
   -- Рендеринг Markdown
-  { "MeanderingProgrammer/render-markdown.nvim", opts = {} },
+  --{ "MeanderingProgrammer/render-markdown.nvim", opts = {} },
+  { "OXY2DEV/markview.nvim" },
 
   -- Предпросмотр Markdown
   { "iamcco/markdown-preview.nvim", build = "cd app && npx --yes yarn install" },
