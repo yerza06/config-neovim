@@ -51,6 +51,15 @@ require("lazy").setup({
   -- Файловый менеджер NERDTree
   { "preservim/nerdtree", cmd = "NERDTree" },
 
+  { "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim", "s1n7ax/nvim-window-picker"
+    }
+  },
+{ 'nvim-treesitter/nvim-treesitter' },
+  
   -- Иконки для Neovim
   { "nvim-tree/nvim-web-devicons" },
 
@@ -113,7 +122,7 @@ require("lazy").setup({
 })
 
 -- Горячие клавиши
-vim.keymap.set("n", "<C-b>", ":NERDTree<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-b>", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<space>", ":nohlsearch<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-o>", ":Telescope find_files<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<TAB>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
