@@ -1,4 +1,4 @@
--- Базовые настройки
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 10           -- Аналог set so=10
@@ -18,7 +18,7 @@ vim.opt.clipboard:append("unnamedplus") -- Аналог set clipboard+=unnamedpl
 vim.opt.swapfile = false         -- Аналог set noswapfile
 
 local function dashboard_header() return {
-  '', '', '',
+ '', '', '',
 '██╗   ██╗███████╗██████╗ ███████╗ █████╗ ███╗   ██╗██╗   ██╗██╗███╗   ███╗',
 '╚██╗ ██╔╝██╔════╝██╔══██╗╚══███╔╝██╔══██╗████╗  ██║██║   ██║██║████╗ ████║',
 ' ╚████╔╝ █████╗  ██████╔╝  ███╔╝ ███████║██╔██╗ ██║██║   ██║██║██╔████╔██║',
@@ -48,8 +48,6 @@ require("lazy").setup({
   -- Статусная строка
   { "nvim-lualine/lualine.nvim", config = function() require("lualine").setup() end },
 
-  -- Файловый менеджер NERDTree
-  { "preservim/nerdtree", cmd = "NERDTree" },
 
   { "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -58,7 +56,37 @@ require("lazy").setup({
       "MunifTanjim/nui.nvim", "s1n7ax/nvim-window-picker"
     }
   },
-{ 'nvim-treesitter/nvim-treesitter' },
+  { 'nvim-treesitter/nvim-treesitter', config = function() require'nvim-treesitter.configs'.setup{
+      -- A list of parser names, or "all" (the listed parsers MUST always be installed
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "rust", "bash", "javascript" },
+
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+      enable = true,
+
+      -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+      -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+      -- the name of the parser)
+      -- list of language that will be disabled
+      disable = { "c", "rust" },
+      -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+      disable = function(lang, buf)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then
+              return true
+          end
+      end,
+
+      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+      -- Using this option may slow down your editor, and you may see some duplicate highlights.
+      -- Instead of true it can also be a list of languages
+      additional_vim_regex_highlighting = false,
+    },
+  } end },
   
   -- Иконки для Neovim
   { "nvim-tree/nvim-web-devicons" },
@@ -75,9 +103,22 @@ require("lazy").setup({
   -- Emmet для быстрого HTML/CSS
   { "mattn/emmet-vim" },
 
-  -- Тема GitHub
-  { "projekt0n/github-nvim-theme", config = function() vim.cmd("colorscheme github_dark_high_contrast") end },
-
+  -- Тема Neovim
+  --{ "projekt0n/github-nvim-theme", config = function() vim.cmd("colorscheme github_dark_high_contrast") end },
+  {
+    'sainnhe/sonokai',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- Optionally configure and load the colorscheme
+      -- directly inside the plugin declaration.
+      vim.g.sonokai_enable_italic = true
+      vim.g.sonokai_disable_italic_comment = 0
+      vim.o.termguicolors = true
+      vim.g.sonokai_style = "atlantis"
+      vim.cmd.colorscheme('sonokai')
+    end
+  },
   -- Интеграция с Git
   { "tpope/vim-fugitive" },
 
@@ -85,7 +126,71 @@ require("lazy").setup({
   { "rbong/vim-flog" },
 
   -- Подсветка TODO-комментариев
-  { "folke/todo-comments.nvim", config = function() require("todo-comments").setup() end },
+  { "folke/todo-comments.nvim", config = function() require("todo-comments").setup{
+    signs = true, -- show icons in the signs column
+    sign_priority = 8, -- sign priority
+    -- keywords recognized as todo comments
+    -- TODO:
+    keywords = {
+      FIX = {
+        icon = " ", -- icon used for the sign, and in search results
+        color = "error", -- can be a hex color, or a named color (see below)
+        alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+        -- signs = false, -- configure signs for some keywords individually
+      },
+      TODO = { icon = " ", color = "info" },
+      HACK = { icon = " ", color = "warning" },
+      WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+      PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+      NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+      TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+    },
+    gui_style = {
+      fg = "NONE", -- The gui style to use for the fg highlight group.
+      bg = "BOLD", -- The gui style to use for the bg highlight group.
+    },
+    merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+    -- highlighting of the line containing the todo comment
+    -- * before: highlights before the keyword (typically comment characters)
+    -- * keyword: highlights of the keyword
+    -- * after: highlights after the keyword (todo text)
+    highlight = {
+      multiline = true, -- enable multine todo comments
+      multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
+      multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
+      before = "", -- "fg" or "bg" or empty
+      keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+      after = "fg", -- "fg" or "bg" or empty
+      pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
+      comments_only = true, -- uses treesitter to match keywords in comments only
+      max_line_len = 400, -- ignore lines longer than this
+      exclude = {}, -- list of file types to exclude highlighting
+    },
+    -- list of named colors where we try to extract the guifg from the
+    -- list of highlight groups or use the hex color if hl not found as a fallback
+    colors = {
+      error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+      warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+      info = { "DiagnosticInfo", "#2563EB" },
+      hint = { "DiagnosticHint", "#10B981" },
+      default = { "Identifier", "#7C3AED" },
+      test = { "Identifier", "#FF00FF" }
+    },
+    search = {
+      command = "rg",
+      args = {
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+      },
+      -- regex that will be used to match keywords.
+      -- don't replace the (KEYWORDS) placeholder
+      pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+      -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+    },
+  } end }, 
 
   -- Автозакрытие скобок
   { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup() end },
@@ -104,7 +209,7 @@ require("lazy").setup({
   { "iamcco/markdown-preview.nvim", build = "cd app && npx --yes yarn install" },
 
   -- Переключение между буферами
-  { "akinsho/bufferline.nvim", tag = "*", opts = {} },
+  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons', config = function() require("bufferline").setup() end },
   --{"loctvl842/monokai-pro.nvim", config = function() vim.cmd("colorscheme monokai-pro-spectrum") end },
 
   {
