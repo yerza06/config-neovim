@@ -14,7 +14,7 @@ vim.opt.mouse = "a"
 vim.opt.encoding = "UTF-8"
 vim.opt.wrap = false
 vim.opt.langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
-vim.opt.clipboard:append("unnamedplus") -- Аналог set clipboard+=unnamedplus
+--vim.opt.clipboard:append("unnamedplus") -- Аналог set clipboard+=unnamedplus
 vim.opt.swapfile = false         -- Аналог set noswapfile
 
 local function dashboard_header() return {
@@ -130,7 +130,6 @@ require("lazy").setup({
     signs = true, -- show icons in the signs column
     sign_priority = 8, -- sign priority
     -- keywords recognized as todo comments
-    -- TODO:
     keywords = {
       FIX = {
         icon = " ", -- icon used for the sign, and in search results
@@ -233,6 +232,7 @@ vim.keymap.set("n", "<space>", ":nohlsearch<CR>", { noremap = true, silent = tru
 vim.keymap.set("n", "<C-o>", ":Telescope find_files<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<TAB>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-t>", ":Telescope registers<CR>", {noremap = true, silent = true});
 
 -- Функция проверки расширения файла
 local function check_file_extension()
@@ -253,6 +253,7 @@ local function check_file_extension()
     vim.opt.shiftwidth = 4
   elseif ext == "md" then
     --vim.cmd("MarkdownPreview") -- Автоматический предпросмотр Markdown
+    vim.opt.wrap = true
     vim.opt.wrap = true
   elseif ext == "html" then
     vim.opt.tabstop = 2
