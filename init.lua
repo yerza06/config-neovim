@@ -91,9 +91,6 @@ require("lazy").setup({
   -- Иконки для Neovim
   { "nvim-tree/nvim-web-devicons" },
 
-  -- Подсветка CSS цветов
-  { "ap/vim-css-color" },
-
   -- Иконки для Vim
   { "ryanoasis/vim-devicons" },
 
@@ -212,27 +209,62 @@ require("lazy").setup({
   --{"loctvl842/monokai-pro.nvim", config = function() vim.cmd("colorscheme monokai-pro-spectrum") end },
 
   {
-  'nvimdev/dashboard-nvim',
-  event = 'VimEnter',
-  config = function()
-    require('dashboard').setup {
-      -- config
-      config = {
-        header = dashboard_header(),
-      },
-    }
-  end,
-  dependencies = { {'nvim-tree/nvim-web-devicons'}}
-}
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        -- config
+        config = {
+          header = dashboard_header(),
+        },
+      }
+    end,
+    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+  },
+
+  -- Подсветка CSS цветов
+  { 'brenoprata10/nvim-highlight-colors', config = function() require("nvim-highlight-colors").setup() end },
+
+  { "mason-org/mason.nvim", config = function() require("mason").setup() end },
+
+  { 
+    "mason-org/mason-lspconfig.nvim", config = function() require("mason-lspconfig").setup{
+       automatic_enable = {
+         exclude = {
+           "rust_analyzer",
+           "ts_ls",
+           "pyright"
+         }
+       }
+     }
+  end },
+
+  { 
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require("lspconfig")
+      lspconfig.lua_ls.setup({})
+      lspconfig.pyright.setup({})
+      lspconfig.ast_wget.setup({})
+    end
+  },
+
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-cmdline" },
+  { "hrsh7th/nvim-cmp" }
 })
 
 -- Горячие клавиши
 vim.keymap.set("n", "<C-b>", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<space>", ":nohlsearch<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-o>", ":Telescope find_files<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<TAB>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-[>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-]>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-t>", ":Telescope registers<CR>", {noremap = true, silent = true});
+
+require("cmp")
 
 -- Функция проверки расширения файла
 local function check_file_extension()
