@@ -102,20 +102,8 @@ require("lazy").setup({
 
   -- Тема Neovim
   --{ "projekt0n/github-nvim-theme", config = function() vim.cmd("colorscheme github_dark_high_contrast") end },
-  {
-    'sainnhe/sonokai',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- Optionally configure and load the colorscheme
-      -- directly inside the plugin declaration.
-      vim.g.sonokai_enable_italic = true
-      vim.g.sonokai_disable_italic_comment = 0
-      vim.o.termguicolors = true
-      vim.g.sonokai_style = "atlantis"
-      vim.cmd.colorscheme('sonokai')
-    end
-  },
+  { "thesimonho/kanagawa-paper.nvim", config = function() vim.cmd("colorscheme kanagawa-paper-ink") end },
+
   -- Интеграция с Git
   { "tpope/vim-fugitive" },
 
