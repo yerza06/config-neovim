@@ -6,7 +6,14 @@ require('core.configs')
 -- Установка плагинов
 require('core.plugins')
 
--- NOTE: Настройки плагинов
+-- Горячие клавиши
+require('core.mappings')
+
+-- Настройка темы
+require('core.kanagawa')
+
+
+-- Настройки плагинов
 require('plugins.lualine')
 require('plugins.treesitter')
 require('plugins.lsp')
@@ -19,10 +26,8 @@ require('plugins.nvim-autopairs')
 require('plugins.bufferline')
 require('plugins.dashboard-nvim')
 require('plugins.nvim-highlight-colors')
-
--- Горячие клавиши
-require('core.mappings')
-
+require('plugins.typst-preview')
+require('plugins.terminal')
 
 -- Функция проверки расширения файла
 local function check_file_extension()
@@ -41,6 +46,8 @@ local function check_file_extension()
   elseif ext == "py" then
     vim.opt.tabstop = 4
     vim.opt.shiftwidth = 4
+    vim.keymap.set("n", "<F5>", ":!python main.py<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<F6>", ":!python src/main.py<CR>", { noremap = true, silent = true })
   elseif ext == "md" then
     --vim.cmd("MarkdownPreview") -- Автоматический предпросмотр Markdown
     vim.opt.wrap = true

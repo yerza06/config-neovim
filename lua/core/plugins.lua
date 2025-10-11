@@ -28,9 +28,6 @@ require("lazy").setup({
     }
   },
 
-  -- Рендеринг Markdown
-  -- { "OXY2DEV/markview.nvim" },
-
   { 'nvim-treesitter/nvim-treesitter', dependencies = { "OXY2DEV/markview.nvim" } },
 
   -- Иконки для Neovim
@@ -40,17 +37,20 @@ require("lazy").setup({
   { "ThePrimeagen/vim-be-good" },
 
   -- Emmet для быстрого HTML/CSS
-  { "mattn/emmet-vim" },
+  { "olrtg/nvim-emmet" },
 
   -- Тема Neovim
   --{ "projekt0n/github-nvim-theme", config = function() vim.cmd("colorscheme github_dark_high_contrast") end },
-  { "thesimonho/kanagawa-paper.nvim", config = function() vim.cmd("colorscheme kanagawa-paper-ink") end },
-
-  -- Интеграция с Git
-  { "tpope/vim-fugitive" },
+  { "thesimonho/kanagawa-paper.nvim" },
 
   -- Просмотр Git-логов
-  { "rbong/vim-flog" },
+  { "rbong/vim-flog",
+      lazy = true,
+      cmd = { "Flog", "Flogsplit", "Floggit" },
+      dependencies = {
+        "tpope/vim-fugitive",
+      },
+},
 
   -- Подсветка TODO-комментариев
   { "folke/todo-comments.nvim" }, 
@@ -67,7 +67,14 @@ require("lazy").setup({
   { "nvim-telescope/telescope.nvim", tag = "0.1.8" },
 
   -- Предпросмотр Markdown
-  -- { "iamcco/markdown-preview.nvim", build = "cd app && npx --yes yarn install" },
+  { "iamcco/markdown-preview.nvim", build = "cd app && npx --yes yarn install" },
+  
+  {
+    'chomosuke/typst-preview.nvim',
+    lazy = false, -- or ft = 'typst'
+    version = '1.*',
+    opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+  },
 
   -- Переключение между буферами
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
@@ -76,6 +83,8 @@ require("lazy").setup({
 
   -- Подсветка CSS цветов
   { 'brenoprata10/nvim-highlight-colors' },
+
+  { 'rebelot/terminal.nvim' },
 
   { "neovim/nvim-lspconfig" },
   { "williamboman/mason.nvim" },

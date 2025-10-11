@@ -1,11 +1,26 @@
 -- ~/lua/core/mappings.lua
 
 -- Горячие клавиши
-vim.keymap.set("n", "<C-b>", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-space>", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "gng", ":Neotree dir=./ position=float git_status<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-b>", ":Neotree dir=./ position=left<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<space>", ":nohlsearch<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-o>", ":Telescope find_files<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<*>", ":Telescope grep_string<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "gto", ":Telescope find_files<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "gtf", ":Telescope grep_string<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "gtp", ":Telescope registers<CR>", {noremap = true, silent = true});
+vim.keymap.set("n", "gtm", ":Telescope marks<CR>", {noremap = true, silent = true});
+vim.keymap.set("n", "gtt", ":TodoTelescope<cr>", {noremap = true, silent = true})
+
 vim.keymap.set("n", "<C-]>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-[>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-p>", ":Telescope registers<CR>", {noremap = true, silent = true});
-vim.keymap.set("n", "<C-t>", ":TodoTelescope<CR>", {noremap = true, silent = true});
+vim.keymap.set("n", "<C-\\>", ":BufferLinePickClose<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<F2>", ":BufferLineTabRename<CR>", { noremap = true, silent = true })
+
+
+vim.keymap.set("n", "<F5>", ":!uv run main.py<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<F6>", ":!uv run src/main.py<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<F7>", ":!python -m http.server 1000<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<C-t>", ":TermOpen<CR>", {noremap = true, silent = true})
+
+vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
