@@ -1,1 +1,30 @@
-require('mason').setup()
+require("mason").setup()
+-- return {
+--   "williamboman/mason.nvim",
+--   dependencies = {
+--     "williamboman/mason-lspconfig.nvim",
+--   },
+--   config = function()
+--     local mason = require("mason")
+--     local mason_lspconfig = require("mason-lspconfig")
+--
+--     mason.setup()
+--
+--     mason_lspconfig.setup({
+--       ensure_installed = {
+--         "pyright",
+--         "ruff_lsp",
+--         "lua_ls",
+--         "html",
+--         "cssls",
+--         "jsonls",
+--         "tsserver",
+--         "marksman",
+--         "bashls",
+--         "clangd",
+--         "dockerls",
+--       }
+--     })
+--   end
+-- }
+

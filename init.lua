@@ -10,15 +10,16 @@ require('core.plugins')
 require('core.mappings')
 
 -- Настройка темы
-require('core.kanagawa')
+-- require('core.kanagawa')
+require('core.monokai-pro')
 
 
 -- Настройки плагинов
 require('plugins.lualine')
 require('plugins.treesitter')
 require('plugins.lsp')
-require('plugins.cmp')
 require('plugins.mason')
+require('plugins.cmp')
 require('plugins.telescope')
 require('plugins.todo-comments')
 require('plugins.comment-nvim')
@@ -46,8 +47,8 @@ local function check_file_extension()
   elseif ext == "py" then
     vim.opt.tabstop = 4
     vim.opt.shiftwidth = 4
-    vim.keymap.set("n", "<F5>", ":!python main.py<CR>", { noremap = true, silent = true })
-    vim.keymap.set("n", "<F6>", ":!python src/main.py<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<F5>", ":!uv run main.py<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<F6>", ":!uv run src/main.py<CR>", { noremap = true, silent = true })
   elseif ext == "md" then
     --vim.cmd("MarkdownPreview") -- Автоматический предпросмотр Markdown
     vim.opt.wrap = true

@@ -42,6 +42,7 @@ require("lazy").setup({
   -- Тема Neovim
   --{ "projekt0n/github-nvim-theme", config = function() vim.cmd("colorscheme github_dark_high_contrast") end },
   { "thesimonho/kanagawa-paper.nvim" },
+  { "loctvl842/monokai-pro.nvim" },
 
   -- Просмотр Git-логов
   { "rbong/vim-flog",
@@ -88,6 +89,7 @@ require("lazy").setup({
 
   { "neovim/nvim-lspconfig" },
   { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
 
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-buffer" },
