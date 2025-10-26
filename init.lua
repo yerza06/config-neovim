@@ -47,8 +47,12 @@ local function check_file_extension()
   elseif ext == "py" then
     vim.opt.tabstop = 4
     vim.opt.shiftwidth = 4
-    vim.keymap.set("n", "<F5>", ":!uv run main.py<CR>", { noremap = true, silent = true })
-    vim.keymap.set("n", "<F6>", ":!uv run src/main.py<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<F5>", ":TermRun uv run main.py<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<F6>", ":TermRun uv run src/main.py<CR>", { noremap = true, silent = true })
+  elseif ext == "tsx" then
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 4
+    vim.keymap.set("n", "<F5>", ":TermRun bun run dev<CR>", { noremap = true, silent = true })
   elseif ext == "md" then
     --vim.cmd("MarkdownPreview") -- Автоматический предпросмотр Markdown
     vim.opt.wrap = true
@@ -56,6 +60,7 @@ local function check_file_extension()
   elseif ext == "html" then
     vim.opt.tabstop = 2
     vim.opt.shiftwidth = 2
+    vim.keymap.set("n", "<F5>", ":TermRun python -m http.server 1000<CR>", { noremap = true, silent = true })
   else
     print("Открыт файл с расширением ." .. ext)
   end
