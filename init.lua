@@ -72,3 +72,4 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufNewFile"}, {
   callback = check_file_extension,
 })
 
+vim.cmd("colorscheme flexoki")

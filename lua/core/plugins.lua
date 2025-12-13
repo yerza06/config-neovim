@@ -43,6 +43,7 @@ require("lazy").setup({
   --{ "projekt0n/github-nvim-theme", config = function() vim.cmd("colorscheme github_dark_high_contrast") end },
   { "thesimonho/kanagawa-paper.nvim" },
   { "loctvl842/monokai-pro.nvim" },
+  { "kepano/flexoki-neovim" },
 
   -- Просмотр Git-логов
   { "rbong/vim-flog",

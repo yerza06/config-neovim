@@ -69,4 +69,4 @@ require("kanagawa-paper").setup({
  },
 })
 
-vim.cmd("colorscheme kanagawa-paper-ink")
+-- vim.cmd("colorscheme kanagawa-paper-ink")

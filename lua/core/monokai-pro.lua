@@ -28,4 +28,4 @@ require("monokai-pro").setup({
     -- ...
 })
 
-vim.cmd([[colorscheme monokai-pro-spectrum]])
+-- vim.cmd([[colorscheme monokai-pro-spectrum]])
