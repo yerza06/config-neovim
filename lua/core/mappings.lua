@@ -11,12 +11,12 @@ vim.keymap.set("n", "<space>", ":nohlsearch<CR>", { noremap = true, silent = tru
 
 vim.keymap.set("n", "gto", ":Telescope find_files<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "gtf", ":Telescope grep_string<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "gtp", ":Telescope registers<CR>", {noremap = true, silent = true});
+vim.keymap.set("n", "gtr", ":Telescope registers<CR>", {noremap = true, silent = true});
 vim.keymap.set("n", "gtm", ":Telescope marks<CR>", {noremap = true, silent = true});
 vim.keymap.set("n", "gtt", ":TodoTelescope<cr>", {noremap = true, silent = true})
 
-vim.keymap.set("n", "<C-]>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-[>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-n>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-p>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-\\>", ":BufferLinePick<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-S-\\>", ":BufferLinePickClose<CR>", { noremap = true, silent = true })
 
