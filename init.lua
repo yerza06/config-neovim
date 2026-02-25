@@ -29,6 +29,7 @@ require('plugins.dashboard-nvim')
 require('plugins.nvim-highlight-colors')
 require('plugins.typst-preview')
 require('plugins.terminal')
+require('plugins.gitsigns')
 
 -- Функция проверки расширения файла
 local function check_file_extension()
@@ -60,7 +61,7 @@ local function check_file_extension()
   elseif ext == "html" then
     vim.opt.tabstop = 2
     vim.opt.shiftwidth = 2
-    vim.keymap.set("n", "<F5>", ":TermRun python -m http.server 1000<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<F5>", ":TermRun python -m http.server 000<CR>", { noremap = true, silent = true })
   else
     print("Открыт файл с расширением ." .. ext)
   end
