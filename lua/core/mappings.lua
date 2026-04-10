@@ -1,13 +1,10 @@
 -- ~/lua/core/mappings.lua
 
 -- Горячие клавиши
--- vim.keymap.set("n", "gn", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true })
--- vim.keymap.set("n", "g<space>", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true })
--- vim.keymap.set("n", "G<space>", ":Neotree position=float git_status<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<space>", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true });
-vim.keymap.set("n", "<C-space>", ":Neotree position=float git_status<CR>", { noremap = true, silent = true });
+vim.keymap.set("n", "<C-space>", ":Neotree dir=./ position=float<CR>", { noremap = true, silent = true });
+vim.keymap.set("n", "<C-S-space>", ":Neotree position=float git_status<CR>", { noremap = true, silent = true });
 vim.keymap.set("n", "<C-b>", ":Neotree dir=./ position=left<CR>", { noremap = true, silent = true });
-vim.keymap.set("n", "g<space>", ":nohlsearch<CR>", { noremap = true, silent = true });
+vim.keymap.set("n", "<space>", ":nohlsearch<CR>", { noremap = true, silent = true });
 vim.keymap.set("n", "gs", ":w<CR>", {noremap = true, silent = true});
 vim.keymap.set("n", "gY", "\"+y<CR>", {noremap = true, silent = true});
 vim.keymap.set("n", "gP", "\"+y<CR>", {noremap = true, silent = true});
