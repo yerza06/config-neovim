@@ -1,12 +1,16 @@
 
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = { "c", "query", "python", "rust", "bash", "javascript", "html", "css", "json", "arduino", "yaml", "dockerfile", "gitignore" },
-    ignore_install = { "markdown", "markdown-inline" },
+-- nvim-treesitter 0.12+ — новый API
+-- configs.setup() удалён, подсветка встроена в Neovim
+require('nvim-treesitter').setup({
+  install_dir = vim.fn.stdpath('data') .. '/site',
 
-    -- Install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
-    auto_install = true,
-    highlight = {
-      enable = true,
-    },
-}
+  ensure_installed = { "c", "query", "python", "rust", "bash", "javascript", "html", "css", "json", "arduino", "yaml", "dockerfile", "gitignore", "sql" },
+  ignore_install = { "markdown", "markdown-inline" },
+})
+
+-- Включить встроенную подсветку для всех файлов
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
