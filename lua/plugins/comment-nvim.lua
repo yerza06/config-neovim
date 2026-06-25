@@ -5,6 +5,7 @@
 vim.filetype.add({
   extension = {
     kdl = "kdl",
+    conf = "conf",
   },
 })
 
@@ -17,8 +18,18 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- .conf использует символ # для однострочных комментариев
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "conf",
+  callback = function()
+    vim.bo.commentstring = "# %s"
+    vim.bo.comments = ":#"
+  end,
+})
+
 local ft = require("Comment.ft")
 ft.set("kdl", { "//%s", "/*%s*/" })
+ft.set("conf", "#%s")
 
 require("Comment").setup({
   -- Для KDL явно возвращаем commentstring.
@@ -27,6 +38,8 @@ require("Comment").setup({
   pre_hook = function(ctx)
     if vim.bo.filetype == "kdl" then
       return ft.get("kdl", ctx.ctype)
+    elseif vim.bo.filetype == "conf" then
+      return ft.get("conf", ctx.ctype)
     end
   end,
 })
